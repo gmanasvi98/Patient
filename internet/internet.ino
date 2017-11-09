@@ -8,7 +8,7 @@ SoftwareSerial esp8266(RX_PIN, TX_PIN);
 
 //Setting server with id of patient 13
 String server = "192.168.43.125";
-String uri = "/api/patients/patient/10";
+String uri = "/api/patients/patient/09";
 
 
 void setup()
@@ -36,7 +36,7 @@ void connectWifi() {
 
 void httppost(){
   Serial.println("Connected to wifi..");
-  String data="{\"patient_status\": \"\"}";
+  String data="{\"patient_status\": \"help\"}";
   esp8266.println("AT+CIPSTART=\"TCP\",\"" + server + "\",3000");
   delay(2000);
   if( esp8266.find("OK")) {

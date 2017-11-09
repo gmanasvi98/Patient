@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Patients = require('../models/patient');
 
+//kiet location cordinates  28.752796, 77.499083
 
 router.get('/',(req,res,next)=>{
     res.json({"success":"done"});
@@ -68,9 +69,6 @@ router.post('/patients/patient/:id', (req, res, next)=>{
             res.json({success:true, msg:"Updated post patient"});
         }
     })
-
 });
-
-
 
 module.exports = router;
