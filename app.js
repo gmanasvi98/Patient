@@ -6,6 +6,14 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 
+const app = express();
+const server = require('http').createServer(app);  
+const io = require('socket.io')(server);
+
+//Port Number
+const port = 3000;
+
+
 //Connect to database
 mongoose.connect(config.database);
 
@@ -19,11 +27,8 @@ mongoose.connection.on('error', (err) => {
     console.log('Database error: '+err);
 })
 
-const app = express();
 const api = require('./routes/index.js');
 
-//Port Number
-const port = 3001;
 
 //CORS Middleware
 app.use(cors());
@@ -46,6 +51,6 @@ app.get('/', (req, res) => {
     res.send("Invalid EndPoint");
 });
 
-app.listen(port, ()=>{
+server.listen(port, ()=>{
     console.log('Server is started at port : ' + port);
 });

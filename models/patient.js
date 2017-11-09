@@ -5,7 +5,11 @@ const patientSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    patient_no: {
+    patient_id: {
+        type: String,
+        required: true
+    },
+    patient_gender: {
         type: String,
         required: true
     },
@@ -23,6 +27,9 @@ const patientSchema = mongoose.Schema({
     },
     patient_room_temp: {
         type: String
+    },
+    patient_phone_no: {
+        type: String
     }
 });
 
@@ -34,10 +41,15 @@ module.exports.getPatientAll = function(callback){
 }
 
 module.exports.getPatientByNo = function(patient_no, callback){
-    const query = {patient_no:patient_no};
+    const query = {patient_id:patient_no};
     Patients.findOne(query, callback);
 }
 
 module.exports.addPatient = function(newPatient, callback){
     newPatient.save(callback);
+}
+
+module.exports.updatePatient = function(id,newPost, callback){
+    const query = {patient_id:id};
+    Patients.findOneAndUpdate(query, newPost, callback);
 }
